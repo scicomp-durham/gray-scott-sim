@@ -1,0 +1,21 @@
+name: C/C++ CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Install G++
+      run: sudo apt-get install g++ -y
+    - name: Compile and Run Tests
+      run: |
+        g++ -o test_runner test_gs.cpp
+        ./test_runner
