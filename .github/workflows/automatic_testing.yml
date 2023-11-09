@@ -17,5 +17,5 @@ jobs:
       run: sudo apt-get install g++ -y
     - name: Compile and Run Tests
       run: |
-        g++ -o test_runner test_gs.cpp
+        g++ -o test_runner tests_gs.cpp
         ./test_runner
