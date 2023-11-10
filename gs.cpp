@@ -7,6 +7,7 @@
 #include <fstream>
 #include <sstream>
 #include <cmath>
+#include <gtest/gtest.h>
 
 // Define simulation parameters
 const int width = 256;                // Width of the grid
@@ -119,7 +120,23 @@ double countElementsAboveThreshold(double threshold) {
     return (double)(count)/(width*height);
 }
 
+TEST(preflight,check_same_type){
+    bool isSameType = std::is_same<decltype(F), decltype(k)>::value;
+    ASSERT_TRUE(isSameType);
+    isSameType = std::is_same<decltype(u)::value_type, decltype(v)::value_type>::value;
+    ASSERT_TRUE(isSameType);
+}
+
+TEST(preflight,check_same_size){
+    ASSERT_EQ(u.size(), v.size());
+}
+
 int main(int argc, char* argv[]) {
+    ::testing::InitGoogleTest(&argc, argv);
+    if (RUN_ALL_TESTS() != 0){
+        return 1;
+    }
+
     if (argc != 5){
         std::cout << "Usage: " << argv[0] << " <Du> <Dv> <F> <k> <threshold>" << std::endl;
     }
