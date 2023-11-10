@@ -18,8 +18,8 @@ jobs:
       run: sudo apt-get update && sudo apt-get install g++ cppcheck -y
 
     - name: Run cppcheck on simulation code
-      run: cppcheck --enable=all --error-exitcode=1 gs.cpp
-      
+      run: cppcheck --enable=all --error-exitcode=1 --suppress=missingIncludeSystem gs.cpp
+
     - name: Compile and Run Tests
       run: |
         g++ -o test_runner tests_gs.cpp
