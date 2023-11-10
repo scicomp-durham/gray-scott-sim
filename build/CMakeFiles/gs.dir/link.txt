@@ -1,1 +1,0 @@
-/usr/bin/c++ CMakeFiles/gs.dir/gs.cpp.o -o gs  lib/libgtest_main.a lib/libgtest.a -lpthread 
