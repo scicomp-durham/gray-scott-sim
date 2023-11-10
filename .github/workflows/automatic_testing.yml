@@ -2,9 +2,9 @@ name: Checking Tests and Linting
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, googletest ]
   pull_request:
-    branches: [ main ]
+    branches: [ main, googletest ]
 
 jobs:
   build:
