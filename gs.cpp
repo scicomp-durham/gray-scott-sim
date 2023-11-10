@@ -1,5 +1,7 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
+#include <numeric> 
 #include <cstdlib>
 #include <ctime>
 #include <fstream>
@@ -98,6 +100,7 @@ void simulateStep() {
 
 // Function to count elements above a threshold in a 2D vector
 double countElementsAboveThreshold(double threshold) {
+    /* int count = 0;
     int count = 0;
     for (const auto& row : v) {
         for (const double& element : row) {
@@ -105,7 +108,14 @@ double countElementsAboveThreshold(double threshold) {
                 count++;
             }
         }
-    }
+    }*/
+    
+    int count = std::accumulate(v.begin(), v.end(), 0, [threshold](int current_count, const auto& row) {
+    return current_count + std::count_if(row.begin(), row.end(), [threshold](double element) {
+        return element > threshold;
+    });
+});
+
     return (double)(count)/(width*height);
 }
 
