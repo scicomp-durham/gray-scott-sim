@@ -16,7 +16,7 @@ jobs:
     - name: Install dependencies
       run: sudo apt-get update && sudo apt-get install g++ cppcheck -y
     - name: Run cppcheck
-      run: cppcheck --enable=all --error-exitcode=1 .
+      run: cppcheck --enable=all --error-exitcode=1 --force -v .
     - name: Compile and Run Tests
       run: |
         g++ -o test_runner tests_gs.cpp
