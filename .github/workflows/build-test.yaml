@@ -1,0 +1,29 @@
+name: C/C++ CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Install dependencies
+      run: sudo apt-get install libgtest-dev cmake -y
+    - name: Build
+      run: |
+        cd /usr/src/gtest
+        sudo cmake CMakeLists.txt
+        sudo make
+        sudo cp *.a /usr/lib
+        cd -
+    - name: Compile
+      run: g++ -std=c++11 -pthread -o gs_test gs.cpp test.cpp -lgtest
+    - name: Run tests
+      run: ./gs_test
+
