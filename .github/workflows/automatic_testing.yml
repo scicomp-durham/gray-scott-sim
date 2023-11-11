@@ -25,4 +25,4 @@ jobs:
         cd build
         cmake ..
         make
-        ./gs
+        ./tests_gs

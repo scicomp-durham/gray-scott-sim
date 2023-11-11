@@ -1,17 +1,18 @@
 
 #include <gtest/gtest.h>
-#include "gs.cpp"
+#include "gs.hpp"
 
 
 // previous tests made by Sheryl
 
 // (0.1) Check that the type of the model parameters (F, k) matches that of the element type of the u and v vectors.
+
 TEST(preflight,check_same_type){
-    bool isSameType = std::is_same<decltype(F), decltype(k)>::value;
-    ASSERT_TRUE(isSameType);
-    isSameType = std::is_same<decltype(u)::value_type, decltype(v)::value_type>::value;
-    ASSERT_TRUE(isSameType);
+    ASSERT_EQ(typeid(F).name(),typeid(u[0][0]).name());
+    ASSERT_EQ(typeid(k).name(),typeid(v[0][0]).name());
 }
+
+
 
 // (0.2) Check that the variables u and v are the same size
 TEST(preflight,check_same_size){
@@ -22,15 +23,31 @@ TEST(preflight,check_same_size){
 // the third test and additional tests below made by Gary(Angguo)
 
 // (0.3) Check that the simulation produces the mathematically correct answer when u = 0 and v = 0.
-TEST(preflight, check_simulation_with_zero_initial_condition) {
+TEST(simulation, check_simulation_with_zero_initial_condition) {
     // Set initial conditions to u = 0 and v = 0
     u = std::vector<std::vector<double>>(width, std::vector<double>(height, 0.0));
     v = std::vector<std::vector<double>>(width, std::vector<double>(height, 0.0));
-
+    F=0.0;
+    k=0.0;
     for (int iteration = 0; iteration < numIterations; ++iteration) {
         simulateStep();
     }
+    // check all zero
+    for (int i = 0; i < u.size(); i++)
+    {
+        for (int j = 0; j < u[i].size(); j++)
+        {
+            ASSERT_EQ(u[i][j], 0);
+        }
+    }
 
+    for (int i = 0; i < v.size(); i++)
+    {
+        for (int j = 0; j < v[i].size(); j++)
+        {
+            ASSERT_EQ(v[i][j], 0);
+        }
+    }
     // use countElementsAboveThreshold 
     double proportionAboveThreshold = countElementsAboveThreshold(threshold);
 

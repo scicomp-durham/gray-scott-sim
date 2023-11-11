@@ -16,15 +16,39 @@ FetchContent_MakeAvailable(googletest)
 
 enable_testing()
 
-add_executable(
+add_library(
   gs
+  SHARED
+  gs.hpp
+)
+
+set_target_properties(
+  gs
+  PROPERTIES
+  LINKER_LANGUAGE
+  CXX
+)
+
+add_executable(
+  gse
   gs.cpp
 )
 
+
 target_link_libraries(
+  gse
+  gs
+)
+
+add_executable(
+  tests_gs
+  tests_gs.cpp
+)
+
+target_link_libraries(
+  tests_gs
   gs
   GTest::gtest_main
 )
-
 include(GoogleTest)
 # gtest_discover_tests(gs)
