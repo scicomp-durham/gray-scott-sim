@@ -1,6 +1,20 @@
 # gray-scott-sim
 **_Da Cui GS coursework for Professional Skills_**
 
+**_Git Commands_**
+
+Use the Git command to clone the GitHub repository to your local machine. 
+
+`git clone <repositoryURL>`
+
+
+Create a new branch, add all changes to that branch, commit the changes, and finally push the branch to the remote repository for sharing and collaboration with others.
+```
+git checkout -b <newBranchName>
+git add .
+git commit -m "Descriptive commit message"
+git push origin <yourBranchName>
+```
 
 
 **_TEST 0.3_** 
